@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model('users');
 
 module.exports = app => {
-  app.post('/create_user', async (req, res) => {
+  app.post('/api/create_user', async (req, res) => {
     const user = await User.findOne({ username: req.body.username });
     if (user) res.send('Username is taken.');
     else {
@@ -16,7 +16,7 @@ module.exports = app => {
   });
 
   app.post(
-    '/login',
+    '/api/login',
     passport.authenticate('local', { failureRedirect: '/login/failure' }),
     (req, res) => {
       res.redirect('/login/success');
@@ -24,7 +24,7 @@ module.exports = app => {
   );
 
   app.get('/login/success', (req, res) => {
-    res.send('Logged in as user ' + req.user.id);
+    res.redirect('/');
   });
 
   app.get('/login/failure', (req, res) => {
@@ -33,7 +33,7 @@ module.exports = app => {
 
   app.get('/api/current_user', (req, res) => {
     // res.send('Here is your user');
-    res.send({ user: req.user });
+    res.send(req.user);
   });
 
   app.get('/api/logout', (req, res) => {
