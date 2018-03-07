@@ -1,6 +1,6 @@
 .greyout {
   background-color: black;
-  opacity: 0.2;
+  opacity: 0.5;
   z-index: 5;
   position: absolute;
   height: 100%;
@@ -10,12 +10,15 @@
   top: 0;
 }
 
-.gatewayWindow {
-  background-color: #ff0000;
-  opacity: 1;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.loginWindow {
+  background-color: white;
+  position: relative;
+  margin-top: 50px;
+  /* #ff0000; */
+  /* opacity: 1; */
+  /* position: fixed; */
+  /* top: 50%; */
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
   z-index: 10;
 }

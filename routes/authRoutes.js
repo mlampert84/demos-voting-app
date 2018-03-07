@@ -15,21 +15,20 @@ module.exports = app => {
     }
   });
 
-  app.post(
-    '/api/login',
-    passport.authenticate('local', { failureRedirect: '/login/failure' }),
-    (req, res) => {
-      res.redirect('/login/success');
-    }
-  );
-
-  app.get('/login/success', (req, res) => {
-    res.redirect('/');
+  app.post('/api/login', passport.authenticate('local'), (req, res) => {
+    res.status(200).send();
   });
 
-  app.get('/login/failure', (req, res) => {
-    res.send('You failed to log in');
-  });
+  // app.get('/login/success', (req, res) => {
+  //   res.redirect('/');
+  // });
+
+  // app.get('/login/failure', (req, res) => {
+  //   res.status(401).send({});
+  // });
+  // app.get('/api/polls', (req, res) => {
+  //   res.send('Hello there!');
+  // });
 
   app.get('/api/current_user', (req, res) => {
     // res.send('Here is your user');

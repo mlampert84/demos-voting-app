@@ -1,31 +1,22 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import Login from './Login';
-import LoginForm from './LoginForm';
+import { withRouter } from 'react-router-dom';
+import AuthWindow from './authFlow/AuthWindow';
+
+// import { connect } from 'react-redux';
 
 class Gateway extends Component {
-  renderContent() {
-    switch (this.props.gateway) {
-      case 'log_in':
-        return (
-          <div>
-            <div className="greyout" />
-            <LoginForm />
-          </div>
-        );
-      default:
-        return;
-    }
-  }
+  closeGateway = () => {
+    this.props.history.goBack();
+  };
 
   render() {
-    console.log(this.props);
-
-    return <div>{this.renderContent()}</div>;
+    return (
+      <div>
+        <div className="greyout" onClick={this.closeGateway} />
+        <AuthWindow closeGateway={this.closeGateway} />
+      </div>
+    );
   }
 }
 
-function mapStateToProps({ gateway }) {
-  return { gateway };
-}
-export default connect(mapStateToProps)(Gateway);
+export default withRouter(Gateway);
