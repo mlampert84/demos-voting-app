@@ -1,3 +1,6 @@
+nav {
+  padding: 5px 30px;
+}
 .greyout {
   background-color: black;
   opacity: 0.5;
@@ -21,4 +24,21 @@
   /* left: 50%; */
   /* transform: translate(-50%, -50%); */
   z-index: 10;
+}
+
+.card .card-content {
+  padding: 24px 24px 6px 24px;
+}
+
+input.otherAnswer[type='text']:focus,
+textarea {
+  background-color: #e0e0e0 !important;
+}
+
+.otherAnswer {
+  width: 200px !important;
+}
+.otherRadioBtn {
+  /* background-color: red !important; */
+  /* margin-top: 10px; */
 }

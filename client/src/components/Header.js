@@ -29,7 +29,7 @@ class Header extends Component {
   render() {
     // console.log(this.props);
     return (
-      <nav>
+      <nav className="indigo darken-3">
         <div className="nav-wrapper">
           <a href="/" className="left brand-logo">
             Demos
