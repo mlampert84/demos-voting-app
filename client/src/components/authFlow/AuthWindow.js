@@ -77,9 +77,9 @@ class AuthWindow extends Component {
         password: this.state.password
       })
       .then(res => {
-        console.log(res);
-        this.props.fetchUser();
-        this.props.history.push('/my_polls');
+        this.props
+          .fetchUser()
+          .then(() => this.props.history.push(this.props.redirectOnSuccess));
       })
       .catch(err =>
         this.setState({ loginFailure: true, username: '', password: '' })

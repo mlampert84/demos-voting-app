@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
 import Gateway from './Gateway';
 import Landing from './Landing';
 import Poll from './Poll';
+import PollNew from './PollNew';
+import ProtectedRoute from './ProtectedRoute';
 import './App.css';
-const Dashboard = () => <h2>Dashboard</h2>;
+// const Dashboard = () => <h2>Dashboard</h2>;
 
 class App extends Component {
   componentDidMount() {
@@ -21,11 +23,25 @@ class App extends Component {
           <div>
             <Header />
             <div className="container">
-              <Route exact path="/login" component={Gateway} />
-              <Route exact path="/new_user" component={Gateway} />
-              <Route exact path="/" component={Landing} />
-              <Route exact path="/my_polls" component={Dashboard} />
-              <Route path="/poll/:pollId" component={Poll} />
+              <Switch>
+                <Route exact path="/" component={Landing} />
+                <Route exact path="/login" component={Gateway} />
+                <Route exact path="/new_user" component={Gateway} />
+                <Route exact path="/poll/:pollId/" component={Poll} />
+                <ProtectedRoute
+                  exact
+                  path="/my_polls"
+                  auth={this.props.auth}
+                  component={Landing}
+                />
+                <ProtectedRoute
+                  exact
+                  path="/new_poll"
+                  auth={this.props.auth}
+                  component={PollNew}
+                />
+                <Redirect to="/" />
+              </Switch>
             </div>
           </div>
         </BrowserRouter>
@@ -34,4 +50,7 @@ class App extends Component {
   }
 }
 
-export default connect(null, actions)(App);
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+export default connect(mapStateToProps, actions)(App);

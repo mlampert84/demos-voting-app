@@ -12,9 +12,7 @@ module.exports = app => {
   });
 
   app.get('/api/my_polls', async (req, res) => {
-    const polls = await Poll.find({ _user: req.user.id }).select({
-      answers: false
-    });
+    const polls = await Poll.find({ _user: req.user.id });
     // console.log(req.user);
     res.send(polls);
   });

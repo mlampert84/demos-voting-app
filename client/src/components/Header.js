@@ -18,11 +18,21 @@ class Header extends Component {
           </li>
         ];
       default:
-        return (
+        return [
+          <li key="new_poll">
+            <Link to="/new_poll">Create New Poll</Link>
+          </li>,
+          <li key="my_polls">
+            <Link to="/my_polls">My Polls</Link>
+          </li>,
+          <li key="all_polls">
+            <Link to="/">All Polls</Link>
+          </li>,
+
           <li key="logout">
             <a href="/api/logout">Log Out</a>
           </li>
-        );
+        ];
     }
   }
 

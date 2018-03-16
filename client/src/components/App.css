@@ -42,3 +42,17 @@ textarea {
   /* background-color: red !important; */
   /* margin-top: 10px; */
 }
+
+.noHandPointer {
+  cursor: default !important;
+}
+
+.answerOptions {
+  padding-top: '2rem';
+  margin-left: 25px;
+}
+
+.blockBtns {
+  display: block;
+  margin: 0px 20px 10px 20px;
+}
