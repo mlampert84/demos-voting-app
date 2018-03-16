@@ -9,7 +9,6 @@ import Poll from './Poll';
 import PollNew from './PollNew';
 import ProtectedRoute from './ProtectedRoute';
 import './App.css';
-// const Dashboard = () => <h2>Dashboard</h2>;
 
 class App extends Component {
   componentDidMount() {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import PollAnswers from './PollAnswers';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
 class PollSubmitAnswer extends Component {
   state = {
@@ -12,8 +14,16 @@ class PollSubmitAnswer extends Component {
     if (this.state.selectedAnswer === '')
       window.alert('Please select an answer in order to vote.');
     else if (this.state.selectedAnswer === 'other') {
-      if (this.state.otherAnswer === '')
-        window.alert('Please type in an answer in order to submit "Other".');
+      if (!this.props.auth) {
+        if (window.confirm('Please login in order to submit custom asnwer.'))
+          this.props.history.push({
+            pathname: '/login',
+            state: { from: this.props.location }
+          });
+      } else if (this.state.otherAnswer === '')
+        window.alert(
+          'Please type in an answer in order to submit custom answer.'
+        );
       else {
         try {
           await axios.post('/api/add_answer/' + this.props.pollId + '/', {
@@ -99,4 +109,7 @@ class PollSubmitAnswer extends Component {
   }
 }
 
-export default PollSubmitAnswer;
+function mapStateToProps({ auth }) {
+  return { auth };
+}
+export default connect(mapStateToProps)(withRouter(PollSubmitAnswer));
