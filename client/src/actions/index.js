@@ -27,6 +27,6 @@ export const deletePoll = async pollId => {
   if (window.confirm('Your poll will be deleted.')) {
     await axios.delete('/api/poll/' + pollId);
     window.alert('Your poll has been deleted.');
-    window.location.href = '/my_polls';
+    window.location.href = '/';
   }
 };
