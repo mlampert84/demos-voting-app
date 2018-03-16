@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Poll = mongoose.model('polls');
 const Voters = mongoose.model('voters');
 const Answer = mongoose.model('answer');
+const requireLogin = require('./requireLoginMiddleware');
 // const Path = require('path-parser');
 
 module.exports = app => {
@@ -11,7 +12,7 @@ module.exports = app => {
     res.send(polls);
   });
 
-  app.get('/api/my_polls', async (req, res) => {
+  app.get('/api/my_polls', requireLogin, async (req, res) => {
     const polls = await Poll.find({ _user: req.user.id });
     // console.log(req.user);
     res.send(polls);
@@ -22,7 +23,7 @@ module.exports = app => {
     res.send(poll);
   });
 
-  app.post('/api/poll/new', async (req, res) => {
+  app.post('/api/poll/new', requireLogin, async (req, res) => {
     const { question, answers } = req.body;
 
     const poll = new Poll({
@@ -38,7 +39,7 @@ module.exports = app => {
     res.send('Poll document has been saved');
   });
 
-  app.post('/api/add_answer/:pollId', async (req, res) => {
+  app.post('/api/add_answer/:pollId', requireLogin, async (req, res) => {
     await Poll.updateOne(
       { _id: req.params.pollId },
       {
@@ -110,7 +111,7 @@ module.exports = app => {
     res.send('Poll updated.');
   });
 
-  app.delete('/api/poll/:pollId', async (req, res) => {
+  app.delete('/api/poll/:pollId', requireLogin, async (req, res) => {
     await Promise.all([
       Poll.deleteOne({ _id: req.params.pollId }),
       Voters.deleteMany({ _poll: req.params.pollId })

@@ -55,7 +55,7 @@ class Poll extends Component {
                 '&hashtags=DemosVoting'
               }
             >
-              Share &nbsp;&nbsp;&nbsp;<i class="fab fa-twitter" />
+              Share &nbsp;&nbsp;&nbsp;<i className="fab fa-twitter" />
             </a>
           </li>
           {this.props.auth &&
